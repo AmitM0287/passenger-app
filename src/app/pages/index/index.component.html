@@ -1,25 +1,23 @@
 <div class="heading">
-    Passenger Details
+    Passenger Movement
 </div>
 
-<div >
-    <mat-card class="icons">
-        <span class="page-no">Page {{ pageNo }} of {{ numPages }}</span>
+<mat-card class="icons">
+    <span class="page-no">Page {{ pageNo }} of {{ numPages }}</span>
 
-        <button mat-icon-button [disabled]='prevBtn' (click)="prevPage()" class="mat-icon-button">
-            <mat-icon fontSet="material-icons-outlined">chevron_left</mat-icon>
-        </button>
+    <button mat-icon-button [disabled]='prevBtn' (click)="prevPage()" class="mat-icon-button">
+        <mat-icon fontSet="material-icons-outlined">chevron_left</mat-icon>
+    </button>
 
-        <button mat-icon-button [disabled]='nextBtn' (click)="nextPage()" class="mat-icon-button">
-            <mat-icon fontSet="material-icons-outlined">chevron_right</mat-icon>
-        </button>
-    </mat-card>
-</div>
+    <button mat-icon-button [disabled]='nextBtn' (click)="nextPage()" class="mat-icon-button">
+        <mat-icon fontSet="material-icons-outlined">chevron_right</mat-icon>
+    </button>
+</mat-card>
 
 <div class="container">
     <ng-container *ngFor="let array of array">
         <mat-card class="card">
-            <h4>Date: {{ array.Date }}</h4>
+            <h4>Date: {{ (array.Date).substring(0,10) }}</h4>
             <h4>Arrivals Counts: {{ array.ArrivalsActualCounts }}</h4>
             <h4>Departures Counts: {{ array.DeparturesActualCounts }}</h4>
         </mat-card>

@@ -23,6 +23,7 @@ export class IndexComponent implements OnInit {
 
   // Getting passenger data
   getPassengerDetails() {
+    this.array= null;
     this.service.getData(
       this.pageNo
     ).subscribe((response) => {
@@ -36,6 +37,7 @@ export class IndexComponent implements OnInit {
     });
   }
 
+  // Go to previous page
   prevBtn = false;
   prevPage() {
     if(this.pageNo == 1) {
@@ -44,9 +46,11 @@ export class IndexComponent implements OnInit {
     } else {
       this.nextBtn = false;
       this.pageNo -= 1;
+      this.getPassengerDetails();
     }
   }
 
+  // Go to next page
   nextBtn = false;
   nextPage() {
     if(this.pageNo == this.numPages) {
@@ -55,6 +59,7 @@ export class IndexComponent implements OnInit {
     } else {
       this.prevBtn = false;
       this.pageNo += 1;
+      this.getPassengerDetails();
     }
   }
 
