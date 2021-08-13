@@ -2,6 +2,20 @@
     Passenger Details
 </div>
 
+<div >
+    <mat-card class="icons">
+        <span class="page-no">Page {{ pageNo }} of {{ numPages }}</span>
+
+        <button mat-icon-button [disabled]='prevBtn' (click)="prevPage()" class="mat-icon-button">
+            <mat-icon fontSet="material-icons-outlined">chevron_left</mat-icon>
+        </button>
+
+        <button mat-icon-button [disabled]='nextBtn' (click)="nextPage()" class="mat-icon-button">
+            <mat-icon fontSet="material-icons-outlined">chevron_right</mat-icon>
+        </button>
+    </mat-card>
+</div>
+
 <div class="container">
     <ng-container *ngFor="let array of array">
         <mat-card class="card">
@@ -10,8 +24,4 @@
             <h4>Departures Counts: {{ array.DeparturesActualCounts }}</h4>
         </mat-card>
     </ng-container>
-</div>
-
-<div class="buttons" fxLayout="row" fxLayoutAlign="space-around center">
-    <button mat-raised-button color="primary" [disabled]=isDisabled (click)=loadMore()>Load More</button>
 </div>

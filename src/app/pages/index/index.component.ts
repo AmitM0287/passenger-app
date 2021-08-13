@@ -16,37 +16,46 @@ export class IndexComponent implements OnInit {
   }
 
   // Declare variables
-  isDisabled = false;
   res: any;
   array: any;
   pageNo = 1;
-  num_pages: any;
+  numPages = 1;
 
   // Getting passenger data
   getPassengerDetails() {
-    if (this.pageNo > this.num_pages) {
-      this.isDisabled = true;
+    this.service.getData(
+      this.pageNo
+    ).subscribe((response) => {
+      this.res = response;
+      this.array = this.res.data;
+      this.numPages = this.res.num_of_pages;
+    },
+    (error) => {
+      console.log(error);
+      this.snackBar.open('Oops! Something went wrong!', '', {duration: 2000});
+    });
+  }
+
+  prevBtn = false;
+  prevPage() {
+    if(this.pageNo == 1) {
+      this.prevBtn = true;
 
     } else {
-      this.isDisabled = false;
-      this.service.getData(
-        this.pageNo
-      ).subscribe((response) => {
-        this.res = response;
-        this.array = this.res.data;
-        this.num_pages = this.res.num_of_pages;
-        console.log(this.num_pages)
-      },
-      (error) => {
-        console.log(error);
-        this.snackBar.open('Oops! Something went wrong!', '', {duration: 2000});
-      });
+      this.nextBtn = false;
+      this.pageNo -= 1;
     }
   }
 
-  loadMore() {
-    this.pageNo += 1;
-    this.getPassengerDetails();
+  nextBtn = false;
+  nextPage() {
+    if(this.pageNo == this.numPages) {
+      this.nextBtn = true;
+
+    } else {
+      this.prevBtn = false;
+      this.pageNo += 1;
+    }
   }
 
 }
